@@ -9,12 +9,8 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-import os
-from pathlib import Path
-from dotenv import load_dotenv
-import os
 
-load_dotenv()
+from pathlib import Path
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECURITY_KEY')
+SECRET_KEY = 'django-insecure-r99ub%*f%-)_-g^tzxbi)-cu%&59rp+tagr=dz9=p8de(ck!nh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -82,8 +78,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'store_products',
+        'USER': 'postgres',
+        'PASSWORD': '12345',
+
     }
 }
 
@@ -128,3 +127,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
