@@ -8,6 +8,8 @@ class Category(models.Model):
     category_name = models.CharField(max_length=100, verbose_name='категория')
     description = models.TextField(verbose_name='описание', **NULLABLE)
 
+    objects = models.Manager()
+
     def __str__(self):
         return f'{self.category_name}: {self.description}'
 
@@ -25,6 +27,8 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=20, decimal_places=2, verbose_name='цена', **NULLABLE)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения')
+
+    objects = models.Manager()
 
     def __str__(self):
         return f'{self.product_name}, price: {self.price}, '
