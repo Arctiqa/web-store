@@ -1,9 +1,13 @@
 from django.shortcuts import render
 from datetime import datetime
 
+from catalog.models import Product
+
 
 def index(request):
-    return render(request, 'catalog/index.html')
+    latest_products = Product.objects.order_by('-created_at')[:5]
+
+    return render(request, 'catalog/index.html',  {'latest_products': latest_products})
 
 
 def contacts(request):
