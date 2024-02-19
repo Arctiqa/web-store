@@ -27,13 +27,13 @@ class Command(BaseCommand):
         Product.objects.all().delete()
         Category.objects.all().delete()
 
-        category_for_create = []
+        # category_for_create = []
         product_for_create = []
 
         for category in Command.json_read_categories():
             cat = Category.objects.create(category_name=category['fields']['category_name'],
                                           description=category['fields']['description'])
-            category_for_create.append(cat)
+            # category_for_create.append(cat)
 
             old_id = category['pk']
 
