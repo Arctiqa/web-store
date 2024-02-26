@@ -1,0 +1,125 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "category_name": "Плагины",
+      "description": "Описаниие"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "category_name": "Утилиты",
+      "description": "Описание"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "category_name": "Библиотеки",
+      "description": "описание библиотеки"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+      "category_name": "Инструменты",
+      "description": "Текст"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "product_name": "плагин 1",
+      "description": "плагин 1 t",
+      "category": 1,
+      "image": "",
+      "price": "200.00",
+      "created_at": "2024-02-19T11:42:35.382Z",
+      "updated_at": "2024-02-19T11:42:35.382Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "product_name": "плагин 2",
+      "description": "плагин 2 t",
+      "category": 1,
+      "image": "",
+      "price": "300.00",
+      "created_at": "2024-02-19T11:42:48.629Z",
+      "updated_at": "2024-02-19T11:42:48.629Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "product_name": "библиотека",
+      "description": "библиотека",
+      "category": 3,
+      "image": "",
+      "price": "700.00",
+      "created_at": "2024-02-19T11:43:10.438Z",
+      "updated_at": "2024-02-19T11:43:10.438Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "product_name": "утилита 1",
+      "description": "утилита 1 t",
+      "category": 2,
+      "image": "",
+      "price": "500.00",
+      "created_at": "2024-02-19T11:43:35.582Z",
+      "updated_at": "2024-02-19T11:43:35.582Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "product_name": "утилита 2",
+      "description": "утилита 2 t",
+      "category": 2,
+      "image": "",
+      "price": "500.00",
+      "created_at": "2024-02-19T11:43:48.234Z",
+      "updated_at": "2024-02-19T11:43:48.234Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "product_name": "утилита 3",
+      "description": "утилита 3 t",
+      "category": 2,
+      "image": "",
+      "price": "500.00",
+      "created_at": "2024-02-19T11:44:04.152Z",
+      "updated_at": "2024-02-19T11:44:04.152Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+      "product_name": "Инструмент 1",
+      "description": "Инструмент 1 t",
+      "category": 4,
+      "image": "",
+      "price": "800.00",
+      "created_at": "2024-02-19T11:44:26.533Z",
+      "updated_at": "2024-02-19T11:44:26.533Z"
+    }
+  }
+]
