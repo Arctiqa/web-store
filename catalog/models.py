@@ -1,6 +1,5 @@
 from django.db import models
 
-
 NULLABLE = {'null': True, 'blank': True}
 
 
@@ -31,7 +30,8 @@ class Product(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return f'{self.product_name}, price: {self.price}, '
+        return (f'{self.product_name} {self.description} {self.image} {self.category} {self.price} '
+                f'{self.created_at} {self.updated_at}')
 
     class Meta:
         verbose_name = 'продукт'
