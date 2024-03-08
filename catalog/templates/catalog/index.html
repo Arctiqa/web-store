@@ -14,21 +14,21 @@
         <div class="col-3-md3">
 
             <div class="row">
-                {% for product in object_list %}
+                {% for object in object_list %}
                 <div class="col-md-3">
                     <div class="card mb-4 box-shadow">
                         <div class="card-header">
                         </div>
                         <div class="card-body">
-                            <h1 class="card-title pricing-card-title">{{product.product_name}}</h1>
+                            <h1 class="card-title pricing-card-title">{{object.product_name}}</h1>
                             <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                                <li>- Описание: {{product.description|truncatechars:'100' }}</li>
-                                <li>- Цена: {{product.price}} руб.</li>
-                                <li>- Категория: {{ product.category.category_name }}</li>
+                                <li>- Описание: {{object.description|truncatechars:'100' }}</li>
+                                <li>- Цена: {{object.price}} руб.</li>
+                                <li>- Категория: {{ object.category.category_name }}</li>
 
 
                             </ul>
-                            <a href="{% url 'catalog:product' product.pk %}" type="button"
+                            <a href="{% url 'catalog:product' object.pk %}" type="button"
                                class="form-control btn btn-lg btn-block btn-outline-primary">Купить</a>
                         </div>
                     </div>
