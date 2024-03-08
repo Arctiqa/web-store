@@ -1,44 +1,48 @@
 from django.shortcuts import render
 from datetime import datetime
 
+from django.views.generic import ListView, DetailView, TemplateView
+
 from catalog.models import Product, Category
 
 
-def index(request):
-    products = Product.objects.all()
-    latest_products = Product.objects.order_by('-created_at')[:5]
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'catalog/product.html'
+    context_object_name = 'product'
 
-    context = {
-        'object_list': products,
-        'title':  'Главная',
-        'latest_products': latest_products
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = self.get_object()
+        context['title'] = product.product_name
+        return context
+
+
+class IndexListView(ListView):
+    model = Product
+    template_name = 'catalog/index.html'
+    context_object_name = 'object_list'
+    extra_context = {
+        'title': 'Главная',
+        'latest_products': Product.objects.order_by('-created_at')[:5]
     }
 
-    return render(request, 'catalog/index.html',  context)
 
+class ContactsTemplateView(TemplateView):
+    template_name = 'catalog/contacts.html'
 
-def contacts(request):
-    if request.method == 'POST':
+    def post(self, request, *args, **kwargs):
         name = request.POST.get('name')
         phone = request.POST.get('phone')
         message = request.POST.get('message')
         with open('log.txt', 'a', encoding='utf-8') as f:
             f.write(f'{datetime.now()} {name} ({phone}): {message}\n')
 
-    context = {
-        'title': 'Контакты',
-    }
+        return super().get(request, *args, **kwargs)
 
-    return render(request, 'catalog/contacts.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Контакты'
+        return context
 
 
-def product(request, pk):
-
-    product_item = Product.objects.get(pk=pk)
-
-    context = {
-        'product': product_item,
-        'title': product_item.product_name
-
-    }
-    return render(request, 'catalog/product.html', context)
