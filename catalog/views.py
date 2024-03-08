@@ -8,7 +8,7 @@ from catalog.models import Product, Category
 
 class ProductDetailView(DetailView):
     model = Product
-    template_name = 'catalog/product.html'
+    template_name = 'catalog/product_detail.html'
     context_object_name = 'product'
 
     def get_context_data(self, **kwargs):
@@ -20,7 +20,7 @@ class ProductDetailView(DetailView):
 
 class IndexListView(ListView):
     model = Product
-    template_name = 'catalog/index.html'
+    template_name = 'catalog/index_list.html'
     context_object_name = 'object_list'
     extra_context = {
         'title': 'Главная',
