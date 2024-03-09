@@ -15,3 +15,9 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('id', 'product_name', 'price', 'category', 'image')
     list_filter = ('category',)
     search_fields = ('product_name', 'description',)
+
+    fieldsets = (
+        (None, {
+            'fields': ('product_name', 'price', 'category', 'image', 'description')
+        }),
+    )
