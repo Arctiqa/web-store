@@ -1,4 +1,3 @@
-from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
@@ -12,6 +11,9 @@ class BlogListView(ListView):
     extra_context = {
         'title': 'Блог',
     }
+
+    def get_queryset(self):
+        return Blog.objects.filter(is_published=True)
 
 
 class BlogCreateView(CreateView):
@@ -59,7 +61,6 @@ class BlogDetailView(DetailView):
 class BlogDeleteView(DeleteView):
     model = Blog
     success_url = reverse_lazy('blog:list')
-
 
 
 def toggle_activity(request, pk):
