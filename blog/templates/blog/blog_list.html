@@ -9,13 +9,10 @@
 {% for object in object_list %}
 <div class="row">
     <div class="col-12">
+        {% if object.is_published %}
         <hr>
         <h3 class="pb-4 mb-4 fst-italic border-bottom">
-            {% if object.is_published %}
             {{ object.title}}
-            {% else %}
-            <span class="text-muted">{{ object|title }}</span>
-            {% endif %}
         </h3>
         <p>{{ object.body }}</p>
         <div class="col">
@@ -33,7 +30,8 @@
                                class="btn btn-sm btn-outline-danger">Удалить</a>
                         </div>
                         {% if object.is_published %}
-                        <a class="btn btn-warning" href="{% url 'blog:toggle_activity' object.pk %}">Снять с публикации</a>
+                        <a class="btn btn-warning" href="{% url 'blog:toggle_activity' object.pk %}">Снять с
+                            публикации</a>
                         {% else %}
                         <a class="btn btn-success" href="{% url 'blog:toggle_activity' object.pk %}">Опубликовать</a>
                         {% endif %}
@@ -41,6 +39,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
 </div>
 
