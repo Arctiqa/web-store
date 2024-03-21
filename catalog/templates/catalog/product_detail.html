@@ -12,7 +12,13 @@
             </div>
             <a href="{% url 'catalog:index' %}" class="btn btn-lg btn-outline-primary" style="margin-top: 2px;">К
                 каталогу</a>
+            <a href="{% url 'catalog:edit' object.pk %}" class="btn btn-lg btn-outline-primary"
+               style="margin-top: 2px;">Редактировать</a>
+            <a href="{% url 'catalog:delete' object.pk %}" class="btn btn-lg btn-outline-primary"
+               style="margin-top: 2px;">Удалить</a>
+            <p>Активная версия: {{ active_version }}</p>
         </div>
+
         <div class="col-md-6">
             <div class="card box-shadow h-100">
                 <div class="card-body">
