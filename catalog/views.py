@@ -1,9 +1,12 @@
 from django.shortcuts import render
+from django.urls import reverse
+
 from datetime import datetime
 
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 
-from catalog.models import Product, Category
+from catalog.forms import ProductForm
+from catalog.models import Product, Version
 
 
 class ProductDetailView(DetailView):
@@ -15,17 +18,50 @@ class ProductDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         product = self.get_object()
         context['title'] = product.product_name
+
+        active_version = Version.objects.filter(product=product, is_current_version=True).order_by('-id').first()
+        if active_version is None:
+            context['active_version'] = 'Отсутствует'
+        else:
+            context['active_version'] = active_version.version
+
         return context
 
 
-class IndexListView(ListView):
+class ProductListView(ListView):
     model = Product
-    template_name = 'catalog/index_list.html'
+    template_name = 'catalog/product_list.html'
     context_object_name = 'object_list'
-    extra_context = {
-        'title': 'Главная',
-        'latest_products': Product.objects.order_by('-created_at')[:5]
-    }
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['title'] = 'Главная'
+        context['latest_products'] = Product.objects.order_by('-created_at')[:5]
+
+        return context
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+
+    def get_success_url(self):
+        return reverse('catalog:index')
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+
+    def get_success_url(self):
+        return reverse('catalog:index')
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+
+    def get_success_url(self):
+        return reverse('catalog:index')
 
 
 class ContactsTemplateView(TemplateView):
@@ -44,5 +80,3 @@ class ContactsTemplateView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Контакты'
         return context
-
-
