@@ -5,8 +5,9 @@ from catalog.models import Product, Category, Version
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'category_name',)
+    list_display = ('id', 'category_name', 'description')
     list_filter = ('category_name',)
+    list_editable = ('category_name', 'description')
     search_fields = ('category_name', 'description',)
 
 
