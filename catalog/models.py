@@ -10,7 +10,7 @@ class Category(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return f'{self.category_name}: {self.description}'
+        return f'{self.category_name}'
 
     class Meta:
         verbose_name = 'категория'
@@ -30,8 +30,7 @@ class Product(models.Model):
     objects = models.Manager()
 
     def __str__(self):
-        return (f'{self.product_name} {self.description} {self.image} {self.category} {self.price} '
-                f'{self.created_at} {self.updated_at}')
+        return f'{self.product_name}, Категория: {self.category}, Цена: {self.price}'
 
     class Meta:
         verbose_name = 'продукт'
