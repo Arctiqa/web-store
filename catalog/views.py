@@ -1,3 +1,4 @@
+from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse
 
@@ -5,7 +6,7 @@ from datetime import datetime
 
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 
-from catalog.forms import ProductForm
+from catalog.forms import ProductForm, VersionForm
 from catalog.models import Product, Version
 
 
@@ -38,6 +39,17 @@ class ProductListView(ListView):
         context['title'] = 'Главная'
         context['latest_products'] = Product.objects.order_by('-created_at')[:5]
 
+        products = context['object_list']
+
+        for product in products:
+            current_version = product.version_set.filter(is_current_version=True).order_by('-id').first()
+            product.current_version = current_version
+
+            if current_version is None:
+                continue
+            else:
+                product.version = current_version.version
+
         return context
 
 
@@ -55,6 +67,24 @@ class ProductUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('catalog:index')
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        VersionFormset = inlineformset_factory(Product,Version,form=VersionForm,extra=1)
+        if self.request.method == 'POST':
+            context_data['formset'] = VersionFormset(self.request.POST, instance=self.object)
+        else:
+            context_data['formset'] = VersionFormset(instance=self.object)
+        return context_data
+
+    def form_valid(self, form):
+        context_data = self.get_context_data()
+        version_form = context_data['formset']
+        self.object = form.save()
+        if version_form.is_valid():
+            version_form.instance = self.object
+            version_form.save()
+        return super().form_valid(form)
 
 
 class ProductDeleteView(DeleteView):
