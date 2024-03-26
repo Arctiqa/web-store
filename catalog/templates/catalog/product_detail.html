@@ -12,10 +12,12 @@
             </div>
             <a href="{% url 'catalog:index' %}" class="btn btn-lg btn-outline-primary" style="margin-top: 2px;">К
                 каталогу</a>
+            {% if request.user.is_authenticated and request.user == product.owner %}
             <a href="{% url 'catalog:edit' object.pk %}" class="btn btn-lg btn-outline-primary"
                style="margin-top: 2px;">Редактировать</a>
             <a href="{% url 'catalog:delete' object.pk %}" class="btn btn-lg btn-outline-primary"
                style="margin-top: 2px;">Удалить</a>
+            {% endif %}
             <p>Активная версия: {{ active_version }}</p>
         </div>
 
