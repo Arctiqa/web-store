@@ -1,0 +1,320 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 17,
+    "fields": {
+      "category_name": "Плагины",
+      "description": "Описаниие"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 18,
+    "fields": {
+      "category_name": "Утилиты",
+      "description": "Описание"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 19,
+    "fields": {
+      "category_name": "Библиотеки",
+      "description": "Описание"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 20,
+    "fields": {
+      "category_name": "Инструменты",
+      "description": "Описание"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 29,
+    "fields": {
+      "product_name": "плагин 1",
+      "description": "плагин 1 t афываыфвафвафафыавфыва",
+      "category": 17,
+      "owner": 1,
+      "image": "",
+      "price": "200.00",
+      "created_at": "2024-02-19T13:06:01.084Z",
+      "updated_at": "2024-03-20T12:41:19.167Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 30,
+    "fields": {
+      "product_name": "плагин 2",
+      "description": "плагин 2 t",
+      "category": 17,
+      "owner": 1,
+      "image": "",
+      "price": "300.00",
+      "created_at": "2024-02-19T13:06:01.084Z",
+      "updated_at": "2024-02-19T13:06:01.084Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 31,
+    "fields": {
+      "product_name": "утилита 1",
+      "description": "утилита 1 t",
+      "category": 18,
+      "owner": 1,
+      "image": "",
+      "price": "500.00",
+      "created_at": "2024-02-19T13:06:01.084Z",
+      "updated_at": "2024-02-19T13:06:01.084Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 32,
+    "fields": {
+      "product_name": "утилита 2",
+      "description": "утилита 2 t",
+      "category": 18,
+      "owner": 1,
+      "image": "",
+      "price": "500.00",
+      "created_at": "2024-02-19T13:06:01.084Z",
+      "updated_at": "2024-02-19T13:06:01.084Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 33,
+    "fields": {
+      "product_name": "утилита 3",
+      "description": "утилита 3 t",
+      "category": 18,
+      "owner": 1,
+      "image": "",
+      "price": "500.00",
+      "created_at": "2024-02-19T13:06:01.084Z",
+      "updated_at": "2024-02-19T13:06:01.084Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 34,
+    "fields": {
+      "product_name": "библиотека",
+      "description": "библиотека",
+      "category": 19,
+      "owner": 1,
+      "image": "",
+      "price": "700.00",
+      "created_at": "2024-02-19T13:06:01.084Z",
+      "updated_at": "2024-02-19T13:06:01.084Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 35,
+    "fields": {
+      "product_name": "Инструмент 1",
+      "description": "Инструмент 1 t",
+      "category": 20,
+      "owner": 1,
+      "image": "",
+      "price": "800.00",
+      "created_at": "2024-02-19T13:06:01.084Z",
+      "updated_at": "2024-02-19T13:06:01.084Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 36,
+    "fields": {
+      "product_name": "fl nexus",
+      "description": "fl plugin",
+      "category": 17,
+      "owner": 1,
+      "image": "products/ef8047_4d3b30ff5e545a0091e0fb2a72558895.jpg",
+      "price": "400.00",
+      "created_at": "2024-02-26T01:52:44.595Z",
+      "updated_at": "2024-03-26T18:00:12.931Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 38,
+    "fields": {
+      "product_name": "plugin 5",
+      "description": "description",
+      "category": 17,
+      "owner": 1,
+      "image": "",
+      "price": "450.00",
+      "created_at": "2024-03-20T12:29:28.215Z",
+      "updated_at": "2024-03-20T12:29:28.215Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 39,
+    "fields": {
+      "product_name": "plugin 6",
+      "description": "fadsfdsafasdfa",
+      "category": 17,
+      "owner": 1,
+      "image": "",
+      "price": "5000.00",
+      "created_at": "2024-03-20T12:31:13.644Z",
+      "updated_at": "2024-03-24T14:42:58.897Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 40,
+    "fields": {
+      "product_name": "plugin 7",
+      "description": "fadsfdsafasdfa",
+      "category": 17,
+      "owner": 1,
+      "image": "",
+      "price": "5000.00",
+      "created_at": "2024-03-20T12:33:37.870Z",
+      "updated_at": "2024-03-20T12:33:37.870Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 41,
+    "fields": {
+      "product_name": "inst 5",
+      "description": "4546565465",
+      "category": 20,
+      "owner": 1,
+      "image": "",
+      "price": "888.00",
+      "created_at": "2024-03-20T12:35:41.916Z",
+      "updated_at": "2024-03-26T16:28:56.948Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 42,
+    "fields": {
+      "product_name": "plugin 28",
+      "description": "fasdfasdfa",
+      "category": 17,
+      "owner": 1,
+      "image": "",
+      "price": "555.00",
+      "created_at": "2024-03-20T12:37:07.106Z",
+      "updated_at": "2024-03-20T12:37:07.106Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 43,
+    "fields": {
+      "product_name": "Картофель свежий большие бульбы",
+      "description": "большие бульбы",
+      "category": 18,
+      "owner": 8,
+      "image": "",
+      "price": "60.00",
+      "created_at": "2024-03-26T17:32:58.047Z",
+      "updated_at": "2024-03-26T17:50:52.223Z"
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 1,
+    "fields": {
+      "product": 36,
+      "version": 1,
+      "version_name": "первая",
+      "is_current_version": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 2,
+    "fields": {
+      "product": 41,
+      "version": 42,
+      "version_name": "222",
+      "is_current_version": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 4,
+    "fields": {
+      "product": 39,
+      "version": 4,
+      "version_name": "4.0",
+      "is_current_version": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 5,
+    "fields": {
+      "product": 31,
+      "version": 8,
+      "version_name": "8.0",
+      "is_current_version": false
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 6,
+    "fields": {
+      "product": 39,
+      "version": 13,
+      "version_name": "13.0",
+      "is_current_version": null
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 7,
+    "fields": {
+      "product": 36,
+      "version": 3,
+      "version_name": "3.0",
+      "is_current_version": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 8,
+    "fields": {
+      "product": 39,
+      "version": 5,
+      "version_name": "5.0",
+      "is_current_version": false
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 9,
+    "fields": {
+      "product": 39,
+      "version": 5,
+      "version_name": "5.0",
+      "is_current_version": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 10,
+    "fields": {
+      "product": 43,
+      "version": 20,
+      "version_name": "GMO Titan",
+      "is_current_version": true
+    }
+  }
+]
