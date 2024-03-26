@@ -1,0 +1,52 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+
+{% include 'catalog/includes/inc_menu.html' with objects=objects %}
+
+<div class="row">
+    <div class="col">
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'catalog:create' %}" class="btn btn-primary">Добавить продукт</a>
+        <a href="{% url 'catalog:my_products' %}" class="btn btn-primary">Мои продукты</a>
+        {% endif %}
+        <hr>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row text-center">
+        <div class="col-3-md3">
+
+            <div class="row">
+                {% for object in object_list %}
+                <div class="col-md-3">
+                    <div class="card mb-4 box-shadow">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">{{object.product_name}}</h1>
+                            <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                                <li>- Описание: {{object.description|truncatechars:'100' }}</li>
+                                <li>- Цена: {{object.price}} руб.</li>
+                                <li>- Категория: {{ object.category.category_name }}</li>
+                                {% if object.current_version.version is None %}
+                                <li>- Версия: Отсутствует</li>
+                                {% else %}
+                                <li>- Версия: {{ object.current_version.version }}, {{ object.version_name }}</li>
+                                {% endif %}
+
+
+                            </ul>
+                            <a href="{% url 'catalog:product' object.pk %}" type="button"
+                               class="form-control btn btn-lg btn-block btn-outline-primary">подробнее>></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
