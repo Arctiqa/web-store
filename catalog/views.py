@@ -1,5 +1,5 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
-from django.shortcuts import render
 from django.urls import reverse
 
 from datetime import datetime
@@ -49,19 +49,24 @@ class ProductListView(ListView):
                 continue
             else:
                 product.version = current_version.version
+                product.version_name = product.current_version.version_name
 
         return context
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
 
     def get_success_url(self):
         return reverse('catalog:index')
 
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
 
-class ProductUpdateView(UpdateView):
+
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
 
@@ -87,7 +92,7 @@ class ProductUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
 
     def get_success_url(self):
@@ -110,3 +115,32 @@ class ContactsTemplateView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Контакты'
         return context
+
+
+class MyProductsListView(ListView):
+    model = Product
+    template_name = 'catalog/my_product_list.html'
+    context_object_name = 'object_list'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['title'] = 'Главная'
+        products = context['object_list']
+
+        for product in products:
+            current_version = product.version_set.filter(is_current_version=True).order_by('-id').first()
+            product.current_version = current_version
+
+            if current_version is None:
+                continue
+            else:
+                product.version = current_version.version
+                product.version_name = product.current_version.version_name
+
+        return context
+
+    def get_queryset(self):
+
+        user = self.request.user
+        queryset = Product.objects.filter(owner=user)
+        return queryset
