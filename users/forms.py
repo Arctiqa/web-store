@@ -1,5 +1,4 @@
 from django import forms
-from django.core.mail import EmailMultiAlternatives
 
 from catalog.forms import MixinFormControl
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordResetForm, SetPasswordForm
@@ -16,7 +15,7 @@ class UserRegisterForm(MixinFormControl, UserCreationForm):
 class UserProfileForm(MixinFormControl, UserChangeForm):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'phone', 'country', 'avatar')
+        fields = ('first_name', 'last_name', 'phone', 'telegram', 'country', 'avatar')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
