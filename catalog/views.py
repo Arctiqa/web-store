@@ -1,12 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
+from django.http import Http404
 from django.urls import reverse
 
 from datetime import datetime
 
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 
-from catalog.forms import ProductForm, VersionForm
+from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
 from catalog.models import Product, Version
 
 
@@ -34,25 +35,6 @@ class ProductListView(ListView):
     template_name = 'catalog/product_list.html'
     context_object_name = 'object_list'
 
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        context['title'] = 'Главная'
-        context['latest_products'] = Product.objects.order_by('-created_at')[:5]
-
-        products = context['object_list']
-
-        for product in products:
-            current_version = product.version_set.filter(is_current_version=True).order_by('-id').first()
-            product.current_version = current_version
-
-            if current_version is None:
-                continue
-            else:
-                product.version = current_version.version
-                product.version_name = product.current_version.version_name
-
-        return context
-
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
@@ -75,7 +57,7 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        VersionFormset = inlineformset_factory(Product,Version,form=VersionForm,extra=1)
+        VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
         if self.request.method == 'POST':
             context_data['formset'] = VersionFormset(self.request.POST, instance=self.object)
         else:
@@ -90,6 +72,14 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
             version_form.instance = self.object
             version_form.save()
         return super().form_valid(form)
+
+    def get_form_class(self):
+        user = self.request.user
+        if self.object.owner == user or user.is_superuser:
+            return ProductForm
+        elif user.has_perm('catalog.change_description') and user.has_perm('catalog.change_category'):
+            return ProductModeratorForm
+        raise Http404
 
 
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
