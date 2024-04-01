@@ -12,7 +12,7 @@
             </div>
             <a href="{% url 'catalog:index' %}" class="btn btn-lg btn-outline-primary" style="margin-top: 2px;">К
                 каталогу</a>
-            {% if request.user.is_authenticated and request.user == product.owner or perms.catalog.change_description and perms.catalog.change_published_status %}
+            {% if request.user.is_authenticated and request.user == product.owner or perms.catalog.change_product %}
             <a href="{% url 'catalog:edit' object.pk %}" class="btn btn-lg btn-outline-primary"
                style="margin-top: 2px;">Редактировать</a>
             {% endif %}

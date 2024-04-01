@@ -30,7 +30,7 @@
         </div>
         <div class="col-6">
             {% if product %}
-            {% if not perms.catalog.change_version or not product.owner == request.user %}
+            {% if perms.catalog.change_version or product.owner == request.user %}
             <div class="card">
                 <div class="card-body">
                 <div class="card-header" style="margin-bottom: 7px;">
