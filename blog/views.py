@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
@@ -13,13 +15,17 @@ class BlogListView(ListView):
     }
 
     def get_queryset(self):
-        return Blog.objects.filter(is_published=True)
+        user = self.request.user
+        if not user.has_perm('blog.change_blog') and not user.has_perm('blog.change_blog_status'):
+            return Blog.objects.filter(is_published=True)
+        return Blog.objects.all()
 
 
-class BlogCreateView(CreateView):
+class BlogCreateView(PermissionRequiredMixin, CreateView):
     model = Blog
     fields = ('title', 'body')
     success_url = reverse_lazy('blog:list')
+    permission_required = 'blog.add_blog'
 
     def form_valid(self, form):
         if form.is_valid():
@@ -29,11 +35,16 @@ class BlogCreateView(CreateView):
 
         return super().form_valid(form)
 
+    def has_permission(self):
+        user = self.request.user
+        return user.groups.filter(name='content manager').exists()
 
-class BlogUpdateView(UpdateView):
+
+class BlogUpdateView(PermissionRequiredMixin, UpdateView):
     model = Blog
     fields = ('title', 'body')
     template_name = 'blog/blog_form.html'
+    permission_required = 'blog.change_blog'
 
     def form_valid(self, form):
         if form.is_valid():
@@ -58,11 +69,13 @@ class BlogDetailView(DetailView):
         return self.object
 
 
-class BlogDeleteView(DeleteView):
+class BlogDeleteView(PermissionRequiredMixin, DeleteView):
     model = Blog
     success_url = reverse_lazy('blog:list')
+    permission_required = 'blog.delete_blog'
 
 
+@permission_required('blog.change_blog_status')
 def toggle_activity(request, pk):
     blog_item = get_object_or_404(Blog, pk=pk)
     if blog_item.is_published:

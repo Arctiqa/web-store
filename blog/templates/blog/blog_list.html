@@ -4,7 +4,9 @@
 {% include 'catalog/includes/inc_menu.html' %}
 
 <div class="col-12 mb-5">
+    {% if perms.blog.add_blog %}
     <a class="btn btn-outline-primary" href="{% url 'blog:create' %}">Создать тему</a>
+    {% endif %}
 </div>
 {% for object in object_list %}
 <div class="row">
@@ -26,17 +28,23 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                             <a href="{% url 'blog:view' object.pk %}" type="button"
-                               class="btn btn-sm btn-outline-secondary">Чтение</a>
+                               class="btn btn-sm btn-outline-secondary">Читать</a>
+                            {% if perms.blog.change_blog %}
                             <a href="{% url 'blog:edit' object.pk %}" type="button"
                                class="btn btn-sm btn-outline-secondary">Правка</a>
+                            {% endif %}
+                            {% if perms.blog.delete_blog %}
                             <a href="{% url 'blog:delete' object.pk %}" type="button"
                                class="btn btn-sm btn-outline-danger">Удалить</a>
+                            {% endif %}
                         </div>
+                        {% if perms.blog.change_blog_status %}
                         {% if object.is_published %}
                         <a class="btn btn-warning" href="{% url 'blog:toggle_activity' object.pk %}">Снять с
                             публикации</a>
                         {% else %}
                         <a class="btn btn-success" href="{% url 'blog:toggle_activity' object.pk %}">Опубликовать</a>
+                        {% endif %}
                         {% endif %}
                     </div>
                 </div>

@@ -16,3 +16,6 @@ class Blog(models.Model):
     class Meta:
         verbose_name = 'блог'
         verbose_name_plural = 'блоги'
+        permissions = [
+            ('change_blog_status', 'Can change blog theme status')
+        ]
