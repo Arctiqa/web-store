@@ -8,7 +8,9 @@ from datetime import datetime
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, DeleteView
 
 from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
-from catalog.models import Product, Version
+from catalog.models import Product, Version, Category
+from catalog.services import get_products_from_cache, get_categories_from_cache
+from config import settings
 
 
 class ProductDetailView(DetailView):
@@ -18,6 +20,7 @@ class ProductDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         product = self.get_object()
         context['title'] = product.product_name
 
@@ -34,6 +37,11 @@ class ProductListView(ListView):
     model = Product
     template_name = 'catalog/product_list.html'
     context_object_name = 'object_list'
+
+    def get_context_data(self, *args, **kwargs):
+        context_data = super().get_context_data(*args,**kwargs)
+        context_data['products_list'] = get_products_from_cache()
+        return context_data
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
@@ -134,3 +142,12 @@ class MyProductsListView(ListView):
         user = self.request.user
         queryset = Product.objects.filter(owner=user)
         return queryset
+
+
+class CategoryListView(ListView):
+    model = Category
+
+    def get_context_data(self, *args, **kwargs):
+        context_data = super().get_context_data(*args, **kwargs)
+        context_data['categories_list'] = get_categories_from_cache()
+        return context_data
