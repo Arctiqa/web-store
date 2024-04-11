@@ -1,0 +1,29 @@
+{% extends 'catalog/base.html' %}
+<title>Список категорий</title>
+
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Категории</h1>
+</div>
+<div class="col-12 mb-5">
+    {% if request.user.is_authenticated %}
+  <a href="{% url 'catalog:create' %}" class="btn btn-outline-primary">Добавить продукт</a>
+    {% endif %}
+</div>
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row">
+        {% for category in categories_list %}
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                  <p class="card-text"><strong>Категория: {{category.category_name}}</strong></p>
+                  <p class="card-text">{{ category.description }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
