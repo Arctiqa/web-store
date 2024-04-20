@@ -86,7 +86,8 @@ DATABASES = {
         'NAME': 'store_products',
         'USER': 'postgres',
         'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

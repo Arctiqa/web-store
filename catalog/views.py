@@ -10,7 +10,6 @@ from django.views.generic import ListView, DetailView, TemplateView, CreateView,
 from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
 from catalog.models import Product, Version, Category
 from catalog.services import get_products_from_cache, get_categories_from_cache
-from config import settings
 
 
 class ProductDetailView(DetailView):
